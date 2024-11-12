@@ -1,6 +1,7 @@
 ﻿#include "Clock.h"
 #include <time.h>
 #include <chrono>
+#include <thread>
 
 // CPU每秒的频率值
 static int64_t s_cyclespersecond = 0;
@@ -96,7 +97,7 @@ void PTime::SetSecs(int secs)
 
 int PTime::Now()
 {
-	return int(chrono::system_clock::now().time_since_epoch().count() / 10000000);
+	return int(std::chrono::system_clock::now().time_since_epoch().count() / 10000000);
 }
 
 void PTime::SetMSecs(int64_t msecs)
@@ -112,7 +113,7 @@ void PTime::SetMSecs(int64_t msecs)
 
 void PTime::SetNow()
 {
-	SetMSecs(chrono::system_clock::now().time_since_epoch().count() / 10000);
+	SetMSecs(std::chrono::system_clock::now().time_since_epoch().count() / 10000);
 }
 
 std::string PTime::ToString() const
